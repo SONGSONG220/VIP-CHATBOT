@@ -62,7 +62,7 @@ async def anony_boot():
                 BotCommand("status", "Check chatbot enable or disable in chat"),
                 BotCommand("shayri", "Get random shayri for love"),
                 BotCommand("ask", "Ask anything from chatgpt"),
-                BotCommand("repo", "Get chatbot source code"),
+                BotCommand("loda", "Get chatbot source code"),
             ]
         )
         LOGGER.info("Bot commands set successfully.")
