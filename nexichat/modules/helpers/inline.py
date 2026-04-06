@@ -1,13 +1,13 @@
 from pyrogram.types import InlineKeyboardButton
-from config import SUPPORT_GRP, UPDATE_CHNL, MAIN_BOT_USERNAME
-from nexichat import OWNER, nexichat
+from config import SUPPORT_GRP, UPDATE_CHNL, MAIN_BOT_USERNAME, OWNER_ID
 
+OWNER = OWNER_ID
 
 START_BOT = [
     [
         InlineKeyboardButton(
             text="➕ Add Me In Your Group ➕",
-            url=f"https://t.me/{nexichat.username}?startgroup=true",
+            url=f"https://t.me/{MAIN_BOT_USERNAME}?startgroup=true",
         ),
     ],
     [
@@ -46,7 +46,7 @@ HELP_BTN = [
 
 HELP_BUTN = [
     [
-        InlineKeyboardButton(text="« Help »", url=f"https://t.me/{nexichat.username}?start=help"),
+        InlineKeyboardButton(text="« Help »", url=f"https://t.me/{MAIN_BOT_USERNAME}?start=help"),
         InlineKeyboardButton(text="❌ Close", callback_data="CLOSE"),
     ],
 ]
@@ -116,7 +116,7 @@ CLONE_INFO_BTN = [
     [
         InlineKeyboardButton(
             text="🤖 Clone Your Bot",
-            url=f"https://t.me/{MAIN_BOT_USERNAME}?start=clone"
+            url=f"https://t.me/{MAIN_BOT_USERNAME}?start=clone",
         ),
     ],
     [
