@@ -26,13 +26,14 @@ def run_flask():
 async def anony_boot():
     try:
         await nexichat.start()
+        me = await nexichat.get_me()
         try:
             await nexichat.send_message(
                 int(OWNER_ID),
-                f"**{nexichat.mention} Is started ✅**"
+                f"**@{me.username} Is started ✅**"
             )
         except Exception as ex:
-            LOGGER.info(f"@{nexichat.username} Started.")
+            LOGGER.info(f"@{me.username} Started.")
 
         asyncio.create_task(restart_bots())
         asyncio.create_task(restart_idchatbots())
@@ -56,7 +57,10 @@ async def anony_boot():
     except Exception as ex:
         LOGGER.error(ex)
     finally:
-        await nexichat.stop()
+        try:
+            await nexichat.stop()
+        except Exception:
+            pass
 
 
 if __name__ == "__main__":
