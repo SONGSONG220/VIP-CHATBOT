@@ -16,3 +16,4 @@ uvloop
 psutil
 langdetect
 MukeshAPI
+groq
