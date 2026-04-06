@@ -14,8 +14,8 @@ UPDATE_CHNL = getenv("UPDATE_CHNL", "botbykilwakillua")
 OWNER_USERNAME = getenv("OWNER_USERNAME", "usernametnot")
 
 GROQ_API_KEYS = [
-    getenv("GROQ_API_KEY_1", "gsk_Xq2i9NHhMFGhgr3ePqJXWGdyb3FYZ0pvORnPES5Xkyoa1iEWgw"),
-    getenv("GROQ_API_KEY_2", "gsk_q6jmGgCYwGfkP8lNlLYhWGdyb3FYY9mh6uhXygE7KyJNXGX6T5"),
+    getenv("GROQ_API_KEY_1", "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"),
+    getenv("GROQ_API_KEY_2", "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"),
     getenv("GROQ_API_KEY_3", "gsk_Fev8XX9N2TCZ9o0Ls2UeWGdyb3FYc7OgQAuuuNB3HcpshR2tbG"),
 ]
 GROQ_API_KEYS = [k for k in GROQ_API_KEYS if k]
