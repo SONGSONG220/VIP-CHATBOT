@@ -5,13 +5,13 @@ load_dotenv()
 
 API_ID = getenv("API_ID", "37096542")
 API_HASH = getenv("API_HASH", "e87f06819f9d2b3364502b978650568f")
-BOT_TOKEN = getenv("BOT_TOKEN", None)
+BOT_TOKEN = getenv("BOT_TOKEN", "8670466939:AAGkqOfWy6adbrUaGyU8wr7YhjO3zjNXZlw")
 STRING1 = getenv("STRING_SESSION", None)
 MONGO_URL = getenv("MONGO_URL", "mongodb+srv://aditya0:aditya0@cluster0.9m8897t.mongodb.net/?appName=Cluster0")
-OWNER_ID = int(getenv("OWNER_ID", "1808943146"))
-SUPPORT_GRP = getenv("SUPPORT_GRP", "waifexanime")
-UPDATE_CHNL = getenv("UPDATE_CHNL", "waifexanime")
-OWNER_USERNAME = getenv("OWNER_USERNAME", "waifexanime")
+OWNER_ID = int(getenv("OWNER_ID", "7812646657"))
+SUPPORT_GRP = getenv("SUPPORT_GRP", "bothub13")
+UPDATE_CHNL = getenv("UPDATE_CHNL", "botbykilwakillua")
+OWNER_USERNAME = getenv("OWNER_USERNAME", "usernametnot")
 
 GROQ_API_KEYS = [
     getenv("GROQ_API_KEY_1", "gsk_Xq2i9NHhMFGhgr3ePqJXWGdyb3FYZ0pvORnPES5Xkyoa1iEWgw"),
