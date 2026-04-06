@@ -4,19 +4,20 @@ import time
 
 import uvloop
 uvloop.install()
-asyncio.set_event_loop(asyncio.new_event_loop())
-
-from pymongo import MongoClient
 
 try:
-    from Abg import patch
-except Exception:
-    pass
+    loop = asyncio.get_event_loop()
+    if loop.is_closed():
+        raise RuntimeError
+except RuntimeError:
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
 
-from nexichat.userbot.userbot import Userbot
+from pymongo import MongoClient
 from motor.motor_asyncio import AsyncIOMotorClient as MongoCli
 from pyrogram import Client
 from pyrogram.enums import ParseMode
+from nexichat.userbot.userbot import Userbot
 import config
 
 ID_CHATBOT = None
