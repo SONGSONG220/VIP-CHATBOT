@@ -37,7 +37,7 @@ async def clone_txt(client, message):
             user_id = user.id
             username = user.username or user.first_name
             await save_idclonebot_owner(clone_id, message.from_user.id)
-            
+
             details = {
                 "user_id": user.id,
                 "username": username,
@@ -50,7 +50,8 @@ async def clone_txt(client, message):
             total_clones = len(cloned_bots_list)
 
             await app.send_message(
-                int(OWNER_ID), f"**#New_Clone**\n\n**User:** @{username}\n\n**Details:** {details}\n\n**Total Clones:** {total_clones}"
+                int(OWNER_ID),
+                f"**#New_Clone**\n\n**User:** @{username}\n\n**Details:** {details}\n\n**Total Clones:** {total_clones}"
             )
 
             await idclonebotdb.insert_one(details)
@@ -64,9 +65,15 @@ async def clone_txt(client, message):
             await mi.edit_text("**Invalid String Session. Please provide a valid one.**")
         except Exception as e:
             logging.exception("Error during cloning process.")
-            await mi.edit_text(f"**Invalid String Session. Please provide a valid pyrogram string session.:**\n\n**Error:** `{e}`")
+            await mi.edit_text(
+                f"**Invalid String Session. Please provide a valid pyrogram string session.:**\n\n**Error:** `{e}`"
+            )
     else:
-        await message.reply_text("**Provide a Pyrogram String Session after the /idclone **\n\n**Example:** `/idclone string session paste here`\n\n**Get a Pyrogram string session from here:-** [Click Here](https://telegram.tools/session-string-generator#pyrogram,user) ")
+        await message.reply_text(
+            "**Provide a Pyrogram String Session after the /idclone **\n\n"
+            "**Example:** `/idclone string session paste here`\n\n"
+            "**Get a Pyrogram string session from here:-** [Click Here](https://telegram.tools/session-string-generator#pyrogram,user)"
+        )
 
 
 @app.on_message(filters.command(["idcloned", "clonedid"]))
@@ -97,7 +104,10 @@ async def list_cloned_sessions(client, message):
 async def delete_cloned_session(client, message):
     try:
         if len(message.command) < 2:
-            await message.reply_text("**⚠️ Please provide the string session after the command.**\n\n**Example:** `/delidclone your string session here`")
+            await message.reply_text(
+                "**⚠️ Please provide the string session after the command.**\n\n"
+                "**Example:** `/delidclone your string session here`"
+            )
             return
 
         string_session = " ".join(message.command[1:])
@@ -106,10 +116,11 @@ async def delete_cloned_session(client, message):
         cloned_session = await idclonebotdb.find_one({"session": string_session})
         if cloned_session:
             await idclonebotdb.delete_one({"session": string_session})
-            IDCLONES.remove(cloned_session["user_id"])
+            IDCLONES.discard(cloned_session["user_id"])
 
             await ok.edit_text(
-                f"**Your String Session has been removed from my database ✅.**\n\n**Your bot will off after restart @{nexichat.username}**"
+                "**Your String Session has been removed from my database ✅.**\n\n"
+                "**Your bot will go offline after restart.**"
             )
         else:
             await message.reply_text("**⚠️ The provided session is not in the cloned list.**")
@@ -130,13 +141,12 @@ async def delete_all_cloned_sessions(client, message):
         logging.exception(e)
 
 
-
 async def restart_idchatbots():
     global IDCLONES
     try:
         logging.info("Restarting all cloned sessions...")
         sessions = [session async for session in idclonebotdb.find()]
-        
+
         async def restart_session(session):
             string_session = session["session"]
             ai = Client(
@@ -151,7 +161,7 @@ async def restart_idchatbots():
                 await asyncio.sleep(60)
                 await ai.start()
                 user = await ai.get_me()
-                
+
                 if user.id not in IDCLONES:
                     IDCLONES.add(user.id)
 
