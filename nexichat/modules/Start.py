@@ -90,8 +90,9 @@ async def welcome_new_member(client, message: Message):
     await add_served_chat(message.chat.id)
     await set_default_status(message.chat.id)
     try:
+        me = await client.get_me()
         for member in message.new_chat_members:
-            if member.id == nexichat.id:
+            if member.id == me.id:
                 users = len(await get_served_users())
                 chats = len(await get_served_chats())
                 await client.send_photo(
@@ -141,30 +142,21 @@ async def start_group(client, message: Message):
     await client.send_photo(
         message.chat.id,
         photo=START_IMAGE,
-        caption=f"Haay **{message.from_user.first_name}**! Main Hinata hoon~ 🌸\nNaruto mera boyfriend hai hehe~ 💕",
+        caption=(
+            f"Haay! Main **Hinata** hoon~ 🌸\n"
+            f"Naruto mera boyfriend hai hehe~\n\n"
+            f"Mujhse reply karo ya @mention karo! 💕"
+        ),
         reply_markup=InlineKeyboardMarkup(START_BOT),
     )
 
 
-@nexichat.on_message(filters.command("help"))
-async def help_cmd(client, message: Message):
-    await client.send_photo(
-        message.chat.id,
-        photo=HELP_IMAGE,
-        caption=HELP_TEXT,
-        reply_markup=InlineKeyboardMarkup(HELP_BTN),
-    )
-
-
 @nexichat.on_callback_query(filters.regex("^HELP$"))
-async def help_callback(client, cb: CallbackQuery):
+async def help_cb(client, cb: CallbackQuery):
     try:
         await cb.message.edit_caption(
             caption=HELP_TEXT,
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("« Back", callback_data="BACK"),
-                 InlineKeyboardButton("❌ Close", callback_data="CLOSE")]
-            ])
+            reply_markup=InlineKeyboardMarkup(HELP_BTN),
         )
     except:
         await cb.answer(HELP_TEXT[:200], show_alert=True)
